@@ -1,0 +1,17 @@
+[book]
+authors = ["Yusef Karim"]
+language = "en"
+src = "src"
+title = "RISC-V Embedded Systems Training (VEGA edition)"
+
+[rust]
+edition = "2024"
+
+[output.html]
+default-theme = "Light"
+preferred-dark-theme = "Ayu"
+mathjax-support = true
+# no-section-label = true
+
+[build]
+create-missing = false
