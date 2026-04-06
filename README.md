@@ -1,4 +1,4 @@
-# [Training] RISC-V Embedded Systems Training (VEGA edition)
+# RISC-V Embedded Systems Training (VEGA edition)
 
 ## Development Board
 
