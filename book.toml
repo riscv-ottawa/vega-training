@@ -2,13 +2,14 @@
 authors = ["Yusef Karim"]
 language = "en"
 src = "src"
-title = "RISC-V Embedded Systems Training (VEGA edition)"
+title = "Ottawa RISC-V"
+description = "Ottawa RISC-V embedded systems training (VEGA edition)"
 
 [rust]
 edition = "2024"
 
 [output.html]
-default-theme = "Light"
+default-theme = "Ayu"
 preferred-dark-theme = "Ayu"
 mathjax-support = true
 # no-section-label = true

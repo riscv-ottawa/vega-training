@@ -20,13 +20,13 @@ The goal of these sessions is to teach you the following:
   - Focus will be on the [OpenISA VEGAboard (RV32M1-VEGA)](https://github.com/open-isa-org/open-isa.org) development board
 * Simulating hardware using [Renode](https://renode.io/)
 * The basics of real-time operating systems (RTOS) and [Zephyr](https://www.zephyrproject.org/)
-* If time permits, a quick tour of how the [Rust](https://rust-lang.org/) programming language can be used for firmware development and its potential advantages
+<!--* If time permits, a quick tour of how the [Rust](https://rust-lang.org/) programming language can be used for firmware development and its potential advantages-->
 
 In the end, the hope is that you gain fundamental generalizable knowledge relating to the development of firmware for microcontroller-based systems.
 
 ## Development board giveaways
 
-In addition to the above, we'll be giving away up to **30** VEGAboards for **free** to participants throughout the sessions.
+In addition to the above, we'll be giving away up to **15** VEGAboards for **free** to participants throughout the sessions.
 Make sure to attend!
 
 <center>
