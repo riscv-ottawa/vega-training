@@ -2,17 +2,15 @@
 
 [Introduction](./index.md)
 [Development environment](./getting-started/dev-environment.md)
-[Simulating hardware](./getting-started/simulating-hardware.md)
-[Connecting to real hardware](./getting-started/real-hardware.md)
 
 # Firmware development
 
 * [Hello, firmware world]()
-  - [Build system]()
-  - [OpenOCD]()
   - [What is main()?]()
   - [What is a peripheral?]()
   - [Blinky!]()
+  - [Simulating hardware](./getting-started/simulating-hardware.md)
+  - [Connecting to real hardware](./getting-started/real-hardware.md)
   - [Challenge]()
 * [Communicating with the world]()
   - [UART]()
