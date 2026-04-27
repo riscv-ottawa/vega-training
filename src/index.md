@@ -2,8 +2,7 @@
 <h1>
     RISC-V Embedded Systems Training<br/>
     <span style="color: #f17232">VEGA edition</span><br/>
-    <small style="opacity: 0.5;">BTA Design Services</small><br/>
-    <small style="opacity: 0.5;">Between Layers</small>
+    <small style="opacity: 0.5;">RISC-V Ottawa</small><br/>
 </h1>
 </center>
 
@@ -43,6 +42,7 @@ Make sure to attend!
 
 **Instructors:**
 
-* Alfredo Herrera | `aherrera (at) alean-tec.com`
-* Yusef Karim     | `yusef (at) betweenlayers.io`
-* Mathieu Gagnon  | `TBD (at) TBD`
+TBD
+<!--* Yusef Karim     | `TBD (at) TBD`
+* Alfredo Herrera | `TBD (at) TBD`
+* Mathieu Gagnon  | `TBD (at) TBD`-->
