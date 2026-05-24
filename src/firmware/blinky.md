@@ -250,9 +250,30 @@ The Makefile is organized so that adding a new application is just a matter of d
 
 From here on out, no need to run compilation commands by hand, just use `make`! However, now when you `make <app>` and it prints a wall of compile lines and a final size breakdown, you know exactly what each of those lines is doing and why - awesome!
 
+## RISC-V aside: C extension
+
+Now that we've compiled our first program, let's take this as a chance to learn an interesting RISC-V specific detail.
+
+If you take a look at the primary `Makefile`, you'll notice we build every app with `-march=rv32imc`. The `-march` flag tells the compiler which RISC-V base ISA and extensions to target. In our case, it's the 32-bit integer base (`i`), the multiply/divide extension (`m`), and the **C extension** (`c`) for compressed instructions, which lets the compiler emit 16-bit forms of common operations. Most of `main` will be 4-byte forms, but small moves and stack adjustments often can be shrunk to just 2 bytes when this extension is specified/supported.
+
+You can see this by disassembling with GDB:
+```sh
+riscv32-unknown-elf-gdb -q -batch -ex 'disass /r main' build/blinky/blinky.elf
+```
+
+Look at the prologue of `main`. You'll see lines like:
+```
+0x000003fa <+0>:  01 11           addi  sp,sp,-32     # 2-byte c.addi
+0x000003fc <+2>:  06 ce           sw    ra,28(sp)     # 2-byte c.swsp
+0x00000404 <+10>: 23 24 f4 fe     sw    a5,-24(s0)    # 4-byte sw
+```
+
+The instruction in the third column is the standard mnemonic; the raw bytes tell you the encoded length, two bytes for compressed forms and four for the full-width encoding. With the C extension, we get a bunch of small savings that together add up to a potentially significant decrease in binary size. A typical RV32IMC binary is roughly 20-30% smaller than the same code without `c`, which is why almost every microcontroller-class RISC-V chip enables it. We'll come back to this in future sections, when we have to read trap-handler disassembly with both forms mixed together.
+
 ## TLDR
 
 - The RV32M1 SDK ships as a git submodule at `vega-quickstart/rv32m1-sdk`. Populate it with `git submodule update --init --recursive` before building.
 - SDK helpers like `GPIO_TogglePinsOutput` are thin inlined wrappers over a single register store. They give the raw peripheral bits readable names without adding runtime cost.
 - The blinky app is one big super loop: initialize pins, clocks, and the UART; then forever delay and toggle GPIOA pin 24. All three init calls (`BOARD_InitPins`, `BOARD_BootClockRUN`, `BOARD_InitDebugConsole`) are board scaffolding you write once and ignore thereafter.
 - Building for the VEGAboard uses the `riscv32-unknown-elf-` cross-toolchain with `-march=rv32imc` and a vendor-supplied linker script, producing an `.elf` and `.bin`. The top-level `Makefile` wraps all of this behind `make <app>`.
+- The `-march=rv32imc` flag selects the RISC-V base ISA and extensions: `i` (32-bit integer base), `m` (multiply/divide), and `c` (compressed instructions). The C extension lets the compiler emit 2-byte forms of common operations alongside the standard 4-byte ones, shrinking a typical binary by 20-30%.

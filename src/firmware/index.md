@@ -2,9 +2,10 @@
 
 This section introduces the primary focus of this training: firmware development on RISC-V based microcontrollers.
 
-You'll learn:
+The plan for this section:
 
-* The main concepts relating to firmware development in general
-* How to write your first firmware program to blink and LED on the VEGAboard
-* How to flash and run your programs on a real physical VEGAboard
-* How to virtually simulate the VEGAboard and run your programs in simulation (directly on your laptop!)
+* **[Wait, what is firmware?](./what-is-firmware.md)** will cover the main concepts relating to firmware development in general.
+* **[Blinky!](./blinky.md)** covers writing our first firmware program to blink a single LED onboard the VEGAboard.
+* **[Connecting to real hardware](./real-hardware.md)** to flash and run our programs on a real physical VEGAboard.
+* **[Simulating hardware](./simulating-hardware.md)** to virtually simulate the VEGAboard and run your programs in simulation (directly on your laptop!).
+* **[Challenge](./challenge.md)** asks you to extend the blinky program to support all 3 colors of the onboard RGB LED.
