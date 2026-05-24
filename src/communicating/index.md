@@ -8,8 +8,6 @@ By the end of this section we'll be able to enter commands into our VEGAboard ov
 vega> led red on
 vega> echo hello there
 hello there
-vega> cycles
-mcycle=12873492 (delta over one csrr-csrr=2)
 ```
 
 This will be done by developing a simple and tiny read–eval–print loop (REPL), which we'll call the **VegaConsole**
@@ -17,8 +15,8 @@ After we develop it, we'll actually keep returning and building on top of it in 
 
 The plan for this section:
 
-1. **[UART](./uart.md)** will walk through the basics of the protocol itself and the LPUART0 peripheral on the RV32M1. We'll traces a single byte from `PRINTF('A')` down to the store instruction that puts it on the line. Along the way, we'll take two short RISC-V specific detours: reading the `mcycle` CSR to time a UART byte, and looking at our own binary to see where the compressed (`RVC`) instructions are hiding.
+1. **[UART](./uart.md)** will walk through the basics of the protocol itself and the LPUART0 peripheral on the RV32M1. We'll trace a single byte from `PRINTF('A')` down to the store instruction that puts it on the line. Along the way, we'll take a short RISC-V specific detour: reading a CSR clock cycle counter to time a UART byte.
 2. **[Building VegaConsole](./repl.md)** will wrap a busy-polling receive loop, a line buffer, and a small command table around everything to produce a nice interactive REPL.
-3. **[Challenge](./challenge.md)** asks you to add one new command of your own.
+3. **[Challenge](./challenge.md)** asks you to add one or more new command(s) of your own.
 
-As before, you can do everything in Renode if you don't have a board yourself; we'll point out any differences as they come up.
+As before, you can do most things in Renode if you don't have a board yourself - there will be some limitations though, we'll point them out as they come up.
