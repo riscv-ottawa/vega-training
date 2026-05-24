@@ -138,7 +138,12 @@ For blinky specifically, a quick sanity check is to `b GPIO_TogglePinsOutput`, `
 
 ### Viewing serial output
 
-Debugging through GDB is great, but sometimes using print statements over UART is just less hassle. Anything the board writes over LPUART0 comes back on the OpenSDA USB (J12). The Makefile provides a helper for this:
+Debugging through GDB is great, but sometimes using print statements over UART is just less hassle. Anything the board writes over LPUART0 comes back on the OpenSDA USB (J12).
+
+> [!NOTE]
+> We'll learn more about UART in [Communicating with the world](/communicating/index.md).
+
+The Makefile provides a helper for this:
 
 ```sh
 make serial
