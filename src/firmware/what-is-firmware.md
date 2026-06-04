@@ -1,6 +1,6 @@
 # Wait, what is firmware?
 
-*Firmware* is the software that runs directly on a microcontroller.
+In our case, *firmware* is the software that will be running directly on our microcontroller.
 
 > [!NOTE]
 > **Wait, what is a *microcontroller*?**
