@@ -9,7 +9,7 @@ The occurrence of any of the above events results in a **trap**, causing the CPU
 
 By the end of this section, we will be able to deliberately execute an illegal instruction, catch it, print where it happened, and resume the program gracefully.
 
-This page pairs with the `apps/vegaconsole-irq/` example app in the accompanying `vega-quickstart` repository. The trap path we build here lives in `trap_entry.S` (the vector table and assembly stub) and `trap.c` (the C dispatcher), and the `crash` command we use to trigger a trap is in `main.c`. Feel free to open them up and refer to them as you read along.
+This section pairs with the `apps/vegaconsole-irq/` example app in the accompanying `vega-quickstart` repository. The trap path we build here lives in `trap_entry.S` (the vector table and assembly stub) and `trap.c` (the C dispatcher), and the `crash` command we use to trigger a trap is in `main.c`. Feel free to open them up and refer to them as you read along.
 
 ## What happens during a trap?
 
