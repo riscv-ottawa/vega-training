@@ -108,7 +108,7 @@ Note that `volatile` fixes visibility/access, but it is *not* an atomicity guara
 > **A word on `fence`**
 >
 > RISC-V has `fence` instructions for *memory ordering*.
-> You can read more about it [here](https://docs.riscv.org/reference/isa/unpriv/mm-eplan.html#mm-fence).
+> You can read more about it [here](https://docs.riscv.org/reference/isa/unpriv/rv32.html#fence)
 > On a single-issue, in-order, single-core chip like RI5CY, you can usually get away without it.
 > This is because by the time `mret` returns from an ISR, every write the ISR did is visible to `main`, and vice versa. When dealing with more complex cores (out-of-order, multi-core, or with separate I/O ordering domains) `fence` is important.
 > No need to worry about for what we're doing.
