@@ -47,10 +47,10 @@ Your host machine only needs four things:
 
 ## Quickstart template
 
-Once you've installed the above, clone the `vega-quickstart` repository to your machine:
+Once you've installed the above, clone the [`vega-quickstart`](https://github.com/riscv-ottawa/vega-quickstart) repository to your machine:
 
 ```sh
-git clone https://github.com/between-layers/vega-quickstart.git
+git clone https://github.com/riscv-ottawa/vega-quickstart.git
 ```
 
 Open the cloned repository folder in VS Code, and accept the prompt to "Reopen in Container". After a few minutes, VS Code should drop you into a terminal inside the container. From there you can edit code, run `make` to build firmware, run Renode to simulate the board, or (if your host is set up for it) connect to the real VEGAboard over USB. When you are done, closing VS Code shuts the container down; any code changes stay on your host.

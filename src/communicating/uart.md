@@ -1,6 +1,6 @@
 # UART
 
-This section pairs with the `apps/hello-uart/` example app in the accompanying `vega-quickstart` repository, which is a small UART program to help understand the basics. Feel free to open it up and refer to it as you read along.
+This section pairs with the [`apps/hello-uart/`](https://github.com/riscv-ottawa/vega-quickstart/tree/main/apps/hello-uart) example app in the accompanying [`vega-quickstart`](https://github.com/riscv-ottawa/vega-quickstart) repository, which is a small UART program to help understand the basics. Feel free to open it up and refer to it as you read along.
 
 UART stands for Universal Asynchronous Receiver-Transmitter, which is a long way of saying "two wires, no clock". One wire (TX) carries bytes from the chip to whoever's listening, the other (RX) brings bytes the other way. Both sides must agree ahead of time on how fast they'll talk: the *baud rate* (which we briefly mentioned in the first section, using `115200` in our case). There is no shared clock, no acknowledgement, no framing beyond a single start bit and a single stop bit. It is probably the simplest serial protocol there is, which is why it has been showing up on microcontrollers since forever and seems to show no sign of leaving.
 

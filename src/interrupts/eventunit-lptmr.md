@@ -4,7 +4,7 @@ In the last section we wrote a trap handler that can catch *any* interrupt or ex
 
 In this section, we'll go over and build the rest of the pipeline. By the end, we'll have a periodic timer interrupt firing every 10 ms, that then land in the trap handler from the previous page, and runs a tiny interrupt service routine (ISR).
 
-This section continues to pair nicely with the `apps/vegaconsole-irq/` example app in the accompanying `vega-quickstart` repository. Feel free to open it up and refer to it as you read along.
+This section continues to pair nicely with the [`apps/vegaconsole-irq/`](https://github.com/riscv-ottawa/vega-quickstart/tree/main/apps/vegaconsole-irq) example app in the accompanying [`vega-quickstart`](https://github.com/riscv-ottawa/vega-quickstart) repository. Feel free to open it up and refer to it as you read along.
 
 ## The big picture
 
