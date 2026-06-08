@@ -2,7 +2,7 @@
 
 The very first program in this book was [blinky](../firmware/blinky.md), the hello world of embedded systems. This simple program blinked an LED by poking some GPIO registers and used a hand-tuned busy-wait NOP loop for the delay between each blink. It worked...but, now that you know a thing or two about interrupts, it's easy to see how poorly it was implemented. First, the CPU was pinned at 100% doing barely anything useful. Second, the delay duration was complete guesswork tuned to one clock setting. And finally, there was no way for `main` to do anything else. Luckily, we now have the tools improve this.
 
-This section goes over rebuilding blinky using timers and interrupts. You can find the full example code at `apps/blinky-better/` in the accompanying `vega-quickstart` repository, we'll also integrate some of this back into `apps/vegaconsole-irq`. Feel free to open up and refer to them as you read along.
+This section goes over rebuilding blinky using timers and interrupts. You can find the full example code at [`apps/blinky-better/`](https://github.com/riscv-ottawa/vega-quickstart/tree/main/apps/blinky-better) in the accompanying [`vega-quickstart`](https://github.com/riscv-ottawa/vega-quickstart) repository, we'll also integrate some of this back into [`apps/vegaconsole-irq`](https://github.com/riscv-ottawa/vega-quickstart/tree/main/apps/vegaconsole-irq). Feel free to open up and refer to them as you read along.
 
 ## The new architecture
 

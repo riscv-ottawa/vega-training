@@ -1,6 +1,6 @@
 # Blinky!
 
-The classic "hello world" of firmware is getting a single LED to blink. It sounds trivial, but under the hood it touches a surprising number of the ideas from the previous section: pin muxing, clock configuration, memory-mapped peripherals, and the super loop. This section walks through building and understanding the `blinky` application provided in the quickstart repository.
+The classic "hello world" of firmware is getting a single LED to blink. It sounds trivial, but under the hood it touches a surprising number of the ideas from the previous section: pin muxing, clock configuration, memory-mapped peripherals, and the super loop. This section walks through building and understanding the [`blinky`](https://github.com/riscv-ottawa/vega-quickstart/tree/main/apps/blinky) application provided in the [`vega-quickstart`](https://github.com/riscv-ottawa/vega-quickstart) repository.
 
 > [!NOTE]
 > If you really want to have *fun*, it is recommended to download the
@@ -73,7 +73,7 @@ So `GPIO_TogglePinsOutput(GPIOA, 1u << 24)` compiles down to exactly the same st
 
 ## Writing our first program
 
-Our first application will be a small blinky program, you can find it under `vega-quickstart/apps/blinky/`:
+Our first application will be a small blinky program, you can find it under [`apps/blinky/`](https://github.com/riscv-ottawa/vega-quickstart/tree/main/apps/blinky) in the [`vega-quickstart`](https://github.com/riscv-ottawa/vega-quickstart) repository:
 
 ```
 apps/blinky/

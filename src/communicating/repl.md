@@ -2,7 +2,7 @@
 
 Now that we know the basics of UART, let's build something cool: a read-eval-print loop (REPL) *command interpreter*. This interpreter will read a line from the user, determine if they passed a valid pre-defined command, then run the corresponding code for the given command and print its result. That's all a shell really is. Let's build it!
 
-The full source lives at `apps/vegaconsole/main.c` in the accompanying `vega-quickstart` repository.
+The full source lives at [`apps/vegaconsole/main.c`](https://github.com/riscv-ottawa/vega-quickstart/blob/main/apps/vegaconsole/main.c) in the accompanying [`vega-quickstart`](https://github.com/riscv-ottawa/vega-quickstart) repository.
 
 ## Getting loopy
 
