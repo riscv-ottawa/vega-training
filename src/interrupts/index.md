@@ -1,6 +1,6 @@
 # Interrupts and timers
 
-At the end of the last section we built VegaConsole and noticed two problems with it. The first is that `GETCHAR` is a busy-wait: while we sit there waiting for the user to type, the CPU can't do anything else. The second is about structure and decoupling: every line of code we have written so far lives on the same `main`-driven thread, and there is no mechanism for "meanwhile, do this other thing". Both problems have the same fix, and is what we'll be learning next: **interrupts**.
+At the end of the last section we built VegaConsole and noticed two problems with it. The first is that `GETCHAR` is a busy-wait: while we sit there waiting for the user to type, the CPU can't do anything else. The second is about structure and decoupling: every line of code we have written so far lives on the same `main`-driven thread, and there is no mechanism for "meanwhile, do this other thing". Both problems have the same fix, and that is what we'll be learning next: **interrupts**.
 
 An interrupt is the MCU's way of saying "drop what you're doing, run this code, then put things back the way they were". Anything that can trigger an interrupt (a timer, a button being pressed, a UART byte arriving) becomes a thing the main CPU can react to without having to ask. The catch is that setting one up touches a lot of moving pieces, so prepare yourself for a little bit of a bumpy ride as we work through them in order.
 

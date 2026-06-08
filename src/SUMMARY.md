@@ -1,4 +1,4 @@
-# COMP 4109 Challenges
+# RISC-V Ottawa embedded systems training (VEGA edition)
 
 [Introduction](./index.md)
 [Why RISC-V?](./why-riscv.md)

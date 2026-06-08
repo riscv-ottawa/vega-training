@@ -40,8 +40,8 @@ Here is roughly what the full program looks like in detail:
 #include "fsl_common.h"
 #include "board.h"
 
-#define LED_GPIO  GPIOE
-#define LED_PIN   29u
+#define LED_GPIO  GPIOA
+#define LED_PIN   24u   /* red LED, same pin as the original blinky */
 
 static inline void led_toggle(void) {
     LED_GPIO->PTOR = 1u << LED_PIN;

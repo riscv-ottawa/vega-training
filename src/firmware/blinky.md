@@ -40,7 +40,7 @@ rv32m1-sdk/
 ### Peeking inside a driver
 
 Although not totally necessary for you to follow the rest of the training, let's trace one call from the blinky application down to the bare-metal register write we saw last section.
-This will help you understand how to read and interact the SDK source in the case that you want to develop your own applications in the future.
+This will help you understand how to read and interact with the SDK source in the case that you want to develop your own applications in the future.
 
 The application toggles the LED with:
 ```c
@@ -111,7 +111,7 @@ For our simple blinky application, we don't care that much about what speed the 
 > Because UART uses simple binary signaling where each symbol encodes exactly one bit, 115200 baud means 115200 bits per second (11520 bytes/characters per second) on the wire.
 > A faster baud rate means faster communication between the two connected points.
 
-Almost none of the the code in `board.c` is what you would write from scratch for every project. You can usually just write it once per board and then mostly ignore, which is exactly what we've done here.
+Almost none of the code in `board.c` is what you would write from scratch for every project. You can usually just write it once per board and then mostly ignore, which is exactly what we've done here.
 
 > [!NOTE]
 > The version in `apps/blinky/board.c` is a trimmed-down adaptation of the vendor example at `rv32m1-sdk/boards/rv32m1_vega/driver_examples/gpio/led_output/ri5cy/`, rewritten to keep only what blinky actually uses.

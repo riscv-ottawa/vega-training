@@ -15,7 +15,7 @@ It is simply a program that talks to hardware.
 
 Because the hardware is so much smaller than a laptop (often a few hundred kilobytes of flash, tens of kilobytes of RAM, and a single CPU running in the tens of megahertz), firmware is written with those constraints in mind. At times, every byte of memory needs to be minimized, every clock cycle accounted for, and the program has to handle *everything* itself: setting up the chip after reset, reacting to signals from the outside world, and keeping track of time.
 
-The sections below walk through the three ideas that set firmware apart from "regular" software: how a program starts when there is no operating system to launch it, how a single CPU juggles many things at once, and how the code actually *interacts* the physical world around it.
+The sections below walk through the three ideas that set firmware apart from "regular" software: how a program starts when there is no operating system to launch it, how a single CPU juggles many things at once, and how the code actually *interacts with* the physical world around it.
 
 ## How execution starts
 
@@ -34,7 +34,7 @@ That preparation does a few things in order:
 Only *after* all of the above does your `main()` function actually start running. And unlike on a desktop, `main()` on a microcontroller almost never returns. There is nothing for it to return *to*. Instead it typically ends with an infinite `while (1)` loop that does the real work forever (as you gain experience in this area, you'll learn that busy looping forever is typically a bad idea and that's where things like deep sleep and time-based scheduling comes in).
 
 > [!NOTE]
-> If you want to see this process in full detail (for a different chip, but with the same ideas), Memfault's [Zero to main()](https://interrupt.memfault.com/blog/zero-to-main-rust-1) series walks through every step of startup code, from the reset vector to the first line of `main`.
+> If you want to see this process in full detail (for a different chip, but with the same ideas), Memfault's [Zero to main()](https://interrupt.memfault.com/blog/zero-to-main-1) series walks through every step of startup code, from the reset vector to the first line of `main`.
 
 ## What is a peripheral?
 
@@ -93,7 +93,7 @@ You will rarely write code quite *that* raw in practice. Vendor-supplied softwar
 
 ## How is multitasking done on MCUs?
 
-Firmware will often do stuff blink an LED, read a sensor, respond to a button, and print out data, all "at the same time"...how?
+Firmware will often do stuff like blink an LED, read a sensor, respond to a button, and print out data, all "at the same time"...how?
 
 The simplest and most common pattern is a *super loop*: one big `while (1)` inside `main` that checks each task in turn and does a bit of work for each one. It looks something like this:
 

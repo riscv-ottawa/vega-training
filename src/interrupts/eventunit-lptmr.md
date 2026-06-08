@@ -54,7 +54,7 @@ LPTMR (Low-Power Timer) is a simple periodic timer, comprised of a counter that 
 | `0x08` | `CMR` | The compare value the counter races toward                   |
 | `0x0C` | `CNR` | The counter, read-only                                       |
 
-Let's say we wanted a tick every 10 ms, or 100 Hz. By working backwards, we can clock the counter from SIRC (8 MHz), divide by 128 in the prescaler, to get the counter advancing at 62500 Hz, one step every 16 µs. As a result, it reaches 625 in exactly 10 ms, which is where `CMR = 625` comes from. So the three values the code below sets are the SIRC source, the /128 prescaler, and a compare of 625.
+Let's say we want a tick every 10 ms, or 100 Hz. To keep the arithmetic trivial, we clock the counter from the LPO (a low-power 1 kHz oscillator) and bypass the prescaler (`PBYP`), so the counter advances at exactly 1 kHz: one step per millisecond. To fire `hz` times per second we then just set `CMR = 1000 / hz`, so a 100 Hz tick is `CMR = 10`. So the values the code below sets are the LPO source, the prescaler bypass, and a compare of `1000 / hz`.
 
 ```c
 #define LPTMR0_BASE 0x40032000u
@@ -64,10 +64,11 @@ Let's say we wanted a tick every 10 ms, or 100 Hz. By working backwards, we can 
 #define LPTMR_CSR_TIE (1u << 6)   /* compare interrupt enable */
 #define LPTMR_CSR_TCF (1u << 7)   /* compare flag, w1c        */
 
-void lptmr_init_100hz(void) {
+void lptmr_init_hz(uint32_t hz) {
     LPTMR0->CSR = 0;                            /* disabled while we configure */
-    LPTMR0->PSR = SIRC_SOURCE | PRESCALE_128;   /* clock = SIRC / 128          */
-    LPTMR0->CMR = 625;                          /* fire every 10 ms            */
+    LPTMR0->PSR = LPTMR_PSR_PCS(1)              /* clock source: LPO, 1 kHz    */
+                | LPTMR_PSR_PBYP_MASK;          /* bypass the prescaler        */
+    LPTMR0->CMR = 1000u / hz;                   /* fire 'hz' times per second  */
     LPTMR0->CSR = LPTMR_CSR_TIE | LPTMR_CSR_TEN;
 }
 ```
@@ -181,7 +182,7 @@ int main(void) {
     intmux0_enable(LPTMR0_SOURCE_BIT);
     eventunit_enable(INTMUX0_CH0_IRQ);
     set_mstatus_mie();
-    lptmr_init_100hz();      /* start the timer last, after the IRQ path is wired up */
+    lptmr_init_hz(100);      /* start the timer last, after the IRQ path is wired up */
 
     uint32_t last = 0;
     for (;;) {
@@ -197,7 +198,7 @@ Flash it (or run it in Renode) and one dot per second appears on the serial cons
 
 ## TLDR
 
-- RV32M1 is old and has neither a CLINT nor a PLIC. Interrupts go through an the so-called EVENT_UNIT (core-local controller) fed by an INTMUX (peripheral fan-in).
+- RV32M1 is old and has neither a CLINT nor a PLIC. Interrupts go through the so-called EVENT_UNIT (core-local controller) fed by an INTMUX (peripheral fan-in).
 - Three enable flags must all be set for a peripheral IRQ to reach your handler: the peripheral's own interrupt-enable, the INTMUX channel's per-source mask, and the EVENT_UNIT's per-line enable. Plus `mstatus.MIE` globally.
 - LPTMR is a 16-bit counter with one compare-match interrupt. Four registers (`CSR`, `PSR`, `CMR`, `CNR`) are all we need.
 - Dispatch happens in two layers: a switch on `mcause` to find the EVENT_UNIT line, then a read of the INTMUX channel's pending register to find the peripheral.

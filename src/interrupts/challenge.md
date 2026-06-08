@@ -2,7 +2,7 @@
 
 We've built up VegaConsole to now contain a nice heartbeat LED that blinks entirely on its own, driven by the LPTMR ISR while `main()` runs the REPL. This challenge adds one more interrupt source, the user button on the VEGAboard, and uses it to control that heartbeat.
 
-The point of this exercise is you get you to wire up a peripheral and its interrupt source yourself. You've already wired one peripheral all the way to the core, doing this second one yourself will cement the pattern in your noggin.
+The point of this exercise is to get you to wire up a peripheral and its interrupt source yourself. You've already wired one peripheral all the way to the core, doing this second one yourself will cement the pattern in your noggin.
 
 The challenge comes in two parts:
 * Part 1 makes a button press pause and resume the heartbeat.
@@ -14,7 +14,7 @@ Open up `apps/vegaconsole-irq` and let's get started!
 
 Actually, there is one difference worth knowing about before you start (make sure to read this, it will save you time). For the LPTMR interrupt, we saw that it did not reach the core directly. Instead, it fanned in through INTMUX channel 0, which then drove EVENT_UNIT line 24 (`INTMUX0_0_IRQn`). That is why the timer needed three enables: its own `TIE`, the INTMUX channel mask, and the EVENT_UNIT line.
 
-However, the button you'll be asked to configure is is wired differently. On the VEGAboard the user button (SW2) sits on PORTA pin 0, and PORTA's interrupt is `PORTA_IRQn`, which is line 18. Lines 0 through 23 connect *straight* to the EVENT_UNIT, with no INTMUX in between (the fan-in only covers lines 24 to 31). So there is no channel mask to set and no channel pending register to read. Recall the pipeline diagram from [EVENT_UNIT and LPTMR](./eventunit-lptmr.md): the button takes the short path.
+However, the button you'll be asked to configure is wired differently. On the VEGAboard the user button (SW2) sits on PORTA pin 0, and PORTA's interrupt is `PORTA_IRQn`, which is line 18. Lines 0 through 23 connect *straight* to the EVENT_UNIT, with no INTMUX in between (the fan-in only covers lines 24 to 31). So there is no channel mask to set and no channel pending register to read. Recall the pipeline diagram from [EVENT_UNIT and LPTMR](./eventunit-lptmr.md): the button takes the short path.
 
 ```
   LPTMR0  -->  INTMUX0 ch0  -->  EVENT_UNIT line 24  -->  core

@@ -34,7 +34,7 @@ The bit period comes from the baud rate, which is measured in symbols per second
 
 ## LPUART0 on the RV32M1
 
-The RV32M1 has several (Low-Power) UART peripherals. We've already been using LPUART0 this the whole time, but just glossed over it until now: `BOARD_InitDebugConsole` in `apps/blinky/board.c` configures it at 115200 baud and hands it to the SDK's debug console. That's why every `PRINTF` from blinky magically lands on the J12 USB serial port!
+The RV32M1 has several (Low-Power) UART peripherals. We've already been using LPUART0 the whole time, but just glossed over it until now: `BOARD_InitDebugConsole` in `apps/blinky/board.c` configures it at 115200 baud and hands it to the SDK's debug console. That's why every `PRINTF` from blinky magically lands on the J12 USB serial port!
 
 Like every peripheral on this chip, LPUART0 is a small block of memory-mapped registers. From `rv32m1-sdk/devices/RV32M1/RV32M1_ri5cy.h` (or Section 56.3.1 of the reference manual):
 
@@ -58,7 +58,7 @@ Almost everything we do with the UART is one of two things: writing a byte to `D
 
 Feel free to skip this section if math spooks you, as we'll be taking a brief look at the `BAUD` register and the basic math that must be done to derive correct settings. Note, the configuration discussed below is specific to the peripherals of our MCU, but other MCU UART peripherals typically require similar calculations to derive a correct baud rate, so it's super useful to know this stuff!
 
-In our case, inside the LPUART, the input clock is divided by an oversampling rate (**OSR**, default 16) and then by a sub-baud-rate divider (**SBR**) to produce the bit clock. With LPUART0 sourced from FIRC (Fast Internal Reference Clock) at 48 MHz:
+In our case, inside the LPUART, the input clock is divided by an oversampling factor and then by a sub-baud-rate divider (**SBR**) to produce the bit clock. The oversampling factor is set by the **OSR** field, which holds the factor *minus one* (it resets to 15, i.e. oversample by 16), which is why the formula below uses `OSR + 1`. With LPUART0 sourced from FIRC (Fast Internal Reference Clock) at 48 MHz:
 
 ```
 baud = source_clock / ((OSR + 1) × SBR)
@@ -99,7 +99,7 @@ static void uart_putc(char c) {
 
 To receive, you do essentially a mirror of the same thing above: spin until `LPUART_RxDataRegFullFlag` is set, then read `DATA`.
 
-To build the exaple and run it, run the below:
+To build the example and run it, run the below:
 ```sh
 make hello-uart
 make sim-hello-uart   # or make flash-hello-uart on real hardware
@@ -122,6 +122,9 @@ to push the string `hello` into LPUART0's RX as if you'd typed it (the trailing 
 ## RISC-V aside: CSRs and the cycle counter
 
 Great, now we know UART! Let's take a sidestep to introduce something RISC-V specific that we can use to deepen our knowledge and which we'll use again in the next section: **Control and Status Registers**, or CSRs. CSRs are a small bank of architectural registers that aren't part of the integer register file; you access them with their own family of instructions (`csrr`, `csrw`, `csrrs`, `csrrc`). The CSR we'll focus on now is a free-running cycle counter that increments once per clock; on a standard RV32 core it's called `mcycle` (CSR `0xB00`), and reading it tells you how many cycles have passed.
+
+> [!NOTE]
+> Unlike the `uart_putc`/`uart_getc` code above, the helpers in this aside are *not* part of `hello-uart`; they're standalone teaching snippets you can drop into any app's `main.c`. We'll reuse them in this chapter's challenge and again in the next chapter. None of this is needed to use the UART, it's purely a RISC-V detour into how the chip exposes its own state.
 
 > [!WARNING]
 > This section will not work in Renode, you'll need a physical board. We don't have support in Renode for the RI5CY PULP CSR performance counters, so the `csrr`/`csrw` instructions below trap as illegal instructions and the program faults/crashes. If you're following along in the simulator, feel free to read through this section but skip running it.
@@ -168,7 +171,7 @@ Run the math against expectations. At 48 MHz and 115200 baud, one byte on the wi
 ## TLDR
 
 * UART is two wires (TX, RX), no clock, and requires an agreed-upon baud rate. Each byte is a start bit, eight data bits LSB-first, and a stop bit.
-* LPUART0 on the RV32M1 is a memory-mapped peripheral with a handful of registers for configure. Four registers worth knowing are: `BAUD`, `CTRL`, `STAT`, `DATA`.
+* LPUART0 on the RV32M1 is a memory-mapped peripheral with a handful of registers to configure. Four registers worth knowing are: `BAUD`, `CTRL`, `STAT`, `DATA`.
   - Sending a byte is one **write** to `DATA`.
   - Receiving a byte is one **read** of `DATA`.
   - The TX-empty and RX-full bits in `STAT` tell you when a send/receive is allowed.
