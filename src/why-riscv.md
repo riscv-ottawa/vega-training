@@ -16,7 +16,7 @@ At a high-level, RISC-V is:
 
 1. Open: a royalty-free Instruction Set Architecture (ISA) originally developed at UC Berkeley in 2010 and now governed by an open and transparent non-profit foundation (RISC-V International).
 2. Community driven: primarily driven and evolved through open-source specifications and implementations, allowing individuals (like us) and industry to freely contribute and continually advance it.
-3. Modular: The RV32I for 32-bit (what our development board supports) and RV64I for 64-bit base instruction sets are the minimum for each implementation. After that, there are over 100 ratified extensions to pick and choose from when designing real-world hardware.
+3. Modular: The RV32I for 32-bit and RV64I for 64-bit base instruction sets are the minimum for each implementation (our development board builds on RV32I, adding the M and C extensions, i.e. RV32IMC). After that, there are over 100 ratified extensions to pick and choose from when designing real-world hardware.
 
 > [!NOTE]
 > You may be thinking that writing software for an architecture supporting 100+ extensions would be a comparative nightmare.

@@ -72,7 +72,7 @@ for (;;) {
 }
 ```
 
-Thee three branches:
+The three branches:
 
 1. **Enter** (`\r` from most terminals): null-terminate, hand the buffer to `dispatch`, reset, print a fresh prompt.
 2. **Backspace** (DEL `0x7f` or BS `0x08`, depending on the terminal): drop the last character if there is one, then emit the `\b \b` sequence to make the user's screen agree with us.
@@ -141,7 +141,7 @@ In Renode, the LED state shows up on the simulated GPIOA peripheral; you can con
 
 Great, we've got our fancy REPL command interpreter working...however, a few things are not great about our current implementation:
 
-**The CPU is busy-waiting on a human.** Every `GETCHAR` call spins on the `STAT` register until you press a key. While it spins, `main` cannot do anything else. There is no option to have something like "meanwhile, blink an LED in the background" or "meanwhile, sample a sensor every millisecond". The simplest way to see that this is true is to add a that continually does something in a loop. For example, if we added a `blink <hz>` command that toggles the LED in a loop with `delay()`: while it is running, the REPL will be frozen until it returns. The worst part is that the CPU isn't even *doing* anything during the spin in `GETCHAR`; it's just rejecting the same `STAT` bit (a few hundred million times a second)!
+**The CPU is busy-waiting on a human.** Every `GETCHAR` call spins on the `STAT` register until you press a key. While it spins, `main` cannot do anything else. There is no option to have something like "meanwhile, blink an LED in the background" or "meanwhile, sample a sensor every millisecond". The simplest way to see that this is true is to add a command that continually does something in a loop. For example, if we added a `blink <hz>` command that toggles the LED in a loop with `delay()`: while it is running, the REPL will be frozen until it returns. The worst part is that the CPU isn't even *doing* anything during the spin in `GETCHAR`; it's just rejecting the same `STAT` bit (tens of millions of times a second)!
 
 **The whole loop is *foreground* work.** Even if we wanted background work, there is no mechanism for it. Every line of code we've written since blinky has been on the main thread, scheduled by `main` and nothing else. That's fine for a simple blinky and it's kinda fine for our REPL, but the moment we want something more, like a heartbeat tick *and* a REPL *and* a button reaction, we are doomed.
 

@@ -1,4 +1,4 @@
-# COMP 4109 Challenges
+# RISC-V Ottawa embedded systems training (VEGA edition)
 
 [Introduction](./index.md)
 [Why RISC-V?](./why-riscv.md)
@@ -16,11 +16,11 @@
   - [UART](./communicating/uart.md)
   - [Building VegaConsole](./communicating/repl.md)
   - [Challenge](./communicating/challenge.md)
-* [Interrupts and timers]()
-  - [Interrupt controllers]()
-  - [Timers]()
-  - [Blinky, but better!]()
-  - [Challenge]()
+* [Interrupts and timers](./interrupts/index.md)
+  - [The trap model](./interrupts/trap-model.md)
+  - [EVENT_UNIT and LPTMR](./interrupts/eventunit-lptmr.md)
+  - [Blinky, but better!](./interrupts/blinky-better.md)
+  - [Challenge](./interrupts/challenge.md)
 
 # RTOS
 

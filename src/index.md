@@ -2,20 +2,26 @@
 <h1>
     RISC-V Embedded Systems Training<br/>
     <span style="color: #f17232">VEGA edition</span><br/>
-    <small style="opacity: 0.5;">RISC-V Ottawa</small><br/>
 </h1>
 </center>
 
 ## Overview
 
-This training is a hands-on introduction to embedded systems development on RISC-V, built around the OpenISA VEGAboard.
+This training is provided by [RISC-V Ottawa](https://riscvottawa.ca), as a hands-on introduction to embedded systems development on RISC-V, built around the OpenISA VEGAboard.
 Across the sessions, you'll set up a modern containerized toolchain, write and debug firmware for a real RISC-V microcontroller, simulate the same hardware purely in software using Renode, and finally learn how to run applications on top of the Zephyr RTOS.
+
+<center>
+    <figure>
+        <img src="/img/vegaboard.webp" title="Original source: https://renode.readthedocs.io/en/latest/_images/vegaboard.png" alt="OpenISA VEGAboard" width="40%" >
+        <figcaption>OpenISA VEGAboard</figcaption>
+    </figure>
+</center>
 
 No prior embedded or RISC-V experience is assumed, though comfort with C and the command line will help.
 
 ## What will you learn?
 
-The goal of these sessions is to teach you the following:
+The goal of this training material is to teach you the following:
 
 * How to setup a modern containerized embedded systems development environment
 * The basics of RISC-V firmware development
@@ -25,27 +31,3 @@ The goal of these sessions is to teach you the following:
 <!--* If time permits, a quick tour of how the [Rust](https://rust-lang.org/) programming language can be used for firmware development and its potential advantages-->
 
 In the end, the hope is that you gain fundamental generalizable knowledge relating to the development of firmware for microcontroller-based systems.
-
-## Development board giveaways
-
-In addition to the above, we'll be giving away up to **15** VEGAboards for **free** to participants throughout the sessions.
-Make sure to attend!
-
-<center>
-    <img src="/img/vegaboard.webp" title="Original source: https://renode.readthedocs.io/en/latest/_images/vegaboard.png" alt="OpenISA Vegaboard" width="40%" >
-</center>
-
-## Training schedule and agenda
-
-* **Location:** TBD
-* **Times:**
-  - Day TBD: time TBD
-
-## Contact information
-
-**Instructors:**
-
-TBD
-<!--* Yusef Karim     | `TBD (at) TBD`
-* Alfredo Herrera | `TBD (at) TBD`
-* Mathieu Gagnon  | `TBD (at) TBD`-->

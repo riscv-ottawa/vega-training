@@ -20,7 +20,7 @@ The [Visual Studio Code Dev Containers](https://code.visualstudio.com/docs/devco
 
 The container is built on Ubuntu 24.04 (a common Linux distribution). On top of that base, it includes three main pieces:
 
-* [Custom RISC-V compiler suite](https://github.com/open-isa-org/open-isa.org/releases), often called a *toolchain*: the compiler, linker, and related tools that turn C source code into a binary the VEGAboard can execute. We use the prebuilt toolchain from OpenISA, configured for the `rv32i` instruction set (a minimal 32-bit RISC-V variant, which is what the VEGAboard's cores implement).
+* [Custom RISC-V compiler suite](https://github.com/open-isa-org/open-isa.org/releases), often called a *toolchain*: the compiler, linker, and related tools that turn C source code into a binary the VEGAboard can execute. We use the prebuilt toolchain from OpenISA. The VEGAboard's RI5CY core implements `rv32imc` (the 32-bit integer base plus the multiply/divide and compressed extensions), and that's what we compile for.
 * [Renode](https://renode.io/), a simulator that can virtually emulate a VEGAboard. This lets you run and debug your firmware without any physical hardware attached, which is handy for getting started and for experimenting.
 * [OpenOCD](https://openocd.org/), the program that communicates with the *debug probe* on the board. A debug probe is the small circuit, built into the VEGAboard, that lets your computer load firmware onto the chip and step through the running code.
 
@@ -63,7 +63,7 @@ The rest of this page covers the host-specific setup that the container cannot h
 
 Install Docker Engine (or Podman) and VS Code using your distribution's package manager or the upstream instructions. It may be worth adding your user to the `docker` group so that VS Code can talk to the container runtime without asking for a password every time (see the official Docker [post-installation steps](https://docs.docker.com/engine/install/linux-postinstall/) for more info).
 
-Finally, USB permissions will need one small tweak. If connectiong to the physical VEGAboard, you'll like be using the Segger J-Link debug probe provided in the box.
+Finally, USB permissions will need one small tweak. If connecting to the physical VEGAboard, you'll likely be using the Segger J-Link debug probe provided in the box.
 This device identifies itself to your computer with USB vendor ID `1366`. By default Linux only lets the root user open such devices, which is a problem because the container runs as the unprivileged `dev` user. The fix is a *[udev rule](https://wiki.archlinux.org/title/Udev#Introduction_to_udev_rules)*: a one-line configuration that tells the kernel to make the device readable and writable by everyone on the machine.
 
 To create the udev rule, run the following commands:
