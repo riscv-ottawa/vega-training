@@ -1,5 +1,11 @@
 # RISC-V Embedded Systems Training (VEGA edition)
 
+This training is a hands-on introduction to embedded systems development on RISC-V, built around the OpenISA VEGAboard. Across the sessions, you’ll set up a modern containerized toolchain, write and debug firmware for a real RISC-V microcontroller, simulate the same hardware purely in software using Renode, and finally learn how to run applications on top of the Zephyr RTOS.
+
+No prior embedded or RISC-V experience is assumed, though comfort with C and the command line will help.
+
+Read the book here: [vega.riscvottawa.ca](https://vega.riscvottawa.ca)
+
 ## Development Board
 
 * [OpenISA VEGAboard (RV32M1-VEGA)](https://github.com/open-isa-org/open-isa.org)
@@ -25,6 +31,6 @@ This command will keep running, watching for changes and regenerating the site a
 * [OpenOCD](http://openocd.org/)
 * [Zephyr - OpenISA VEGAboard](https://docs.zephyrproject.org/latest/boards/openisa/rv32m1_vega/doc/index.html)
 * [FreeRTOS - RISC-V RV32M1 VEGAboard Demo](https://compiler.freertos.org/Documentation/02-Kernel/03-Supported-devices/04-Demos/Others/RTOS-RISC-V-Vegaboard_Pulp)
-* [The Embedded Rust Book](https://rust-embedded.github.io/book/)
-* [Rust Embedded MB2 Discovery Book](https://docs.rust-embedded.org/discovery-mb2/index.html)
-* [Rust - HAL for the RI5CY core of RV32M1](https://github.com/rv32m1-rust/rv32m1_ri5cy-hal)
+<!-- * [The Embedded Rust Book](https://rust-embedded.github.io/book/) -->
+<!-- * [Rust Embedded MB2 Discovery Book](https://docs.rust-embedded.org/discovery-mb2/index.html) -->
+<!-- * [Rust - HAL for the RI5CY core of RV32M1](https://github.com/rv32m1-rust/rv32m1_ri5cy-hal) -->
